@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Focus</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div>
+        <div class="brand">FOCUS</div>
+        <div class="brand-sub">Mniej chaosu. Więcej wykonania.</div>
+      </div>
+      <nav>
+        <button class="nav active" data-page="today">Dzisiaj</button>
+        <button class="nav" data-page="timer">Timer</button>
+        <button class="nav" data-page="wins">Małe zwycięstwa</button>
+        <button class="nav" data-page="review">Podsumowanie</button>
+        <button class="nav" data-page="history">Historia</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="streak-card"><span>STREAK</span><strong id="streakValue">0 dni</strong></div>
+        <div class="date" id="todayDate"></div>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section class="page active" id="page-today">
+        <div class="page-head">
+          <div><div class="eyebrow">PLAN DNIA</div><h1>Na czym dziś naprawdę zależy?</h1></div>
+          <button class="ghost" id="resetDayBtn">Wyczyść dzień</button>
+        </div>
+        <div class="grid two">
+          <div class="card hero">
+            <label>FOCUS NA DZIŚ</label>
+            <textarea id="focusInput" maxlength="180" placeholder="Np. Jedna rzecz naraz. Nie rozpraszam się."></textarea>
+            <div class="counter"><span id="focusCount">0</span>/180</div>
+          </div>
+          <div class="card">
+            <label>CZEGO DZIŚ NIE ROBIĘ</label>
+            <textarea id="avoidInput" maxlength="180" placeholder="Np. Nie scrolluję bez celu. Nie odpalam losowych filmów."></textarea>
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-title">
+            <div><label>3 NAJWAŻNIEJSZE RZECZY</label><p>Nie 15. Tylko trzy.</p></div>
+            <div class="progress-pill" id="taskProgress">0/3</div>
+          </div>
+          <div id="taskList" class="task-list"></div>
+        </div>
+        <div class="grid two">
+          <div class="card">
+            <label>JEDNA RZECZ DLA SIEBIE</label>
+            <input id="selfInput" placeholder="Np. trening, spacer, książka..." />
+          </div>
+          <div class="card quick-card">
+            <label>SZYBKI START</label>
+            <p>Wybierz długość sesji i przejdź prosto do skupienia.</p>
+            <div class="quick-buttons">
+              <button class="primary startPreset" data-minutes="25">25 min</button>
+              <button class="primary startPreset" data-minutes="50">50 min</button>
+              <button class="primary startPreset" data-minutes="90">90 min</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="page-timer">
+        <div class="page-head">
+          <div><div class="eyebrow">TRYB SKUPIENIA</div><h1>Jedna rzecz. Zero chaosu.</h1></div>
+          <div class="session-count">Dziś: <strong id="sessionCount">0</strong> sesji</div>
+        </div>
+        <div class="timer-card">
+          <input id="timerTask" class="timer-task" placeholder="Nad czym teraz pracujesz?" />
+          <div id="timerDisplay" class="timer-display">25:00</div>
+          <div class="preset-row">
+            <button class="chip timerPreset active" data-minutes="25">25 min</button>
+            <button class="chip timerPreset" data-minutes="50">50 min</button>
+            <button class="chip timerPreset" data-minutes="90">90 min</button>
+          </div>
+          <div class="timer-actions">
+            <button class="primary large" id="startPauseBtn">Start</button>
+            <button class="ghost large" id="resetTimerBtn">Reset</button>
+            <button class="ghost large" id="fullscreenBtn">Pełny ekran</button>
+          </div>
+          <div class="timer-note">Po zakończeniu sesji licznik zapisze ją automatycznie.</div>
+        </div>
+      </section>
+
+      <section class="page" id="page-wins">
+        <div class="page-head">
+          <div><div class="eyebrow">MAŁE ZWYCIĘSTWA</div><h1>Co dziś zrobiłeś dobrze?</h1></div>
+          <div class="progress-pill"><span id="winsCount">0</span>/5</div>
+        </div>
+        <div class="card">
+          <p class="muted">Zapisz 3–5 rzeczy. Nie muszą być wielkie. Liczy się dowód, że idziesz do przodu.</p>
+          <div id="winsList" class="wins-list"></div>
+          <button class="ghost" id="addWinBtn">+ Dodaj zwycięstwo</button>
+        </div>
+      </section>
+
+      <section class="page" id="page-review">
+        <div class="page-head"><div><div class="eyebrow">ZAMKNIĘCIE DNIA</div><h1>Krótko. Bez lania wody.</h1></div></div>
+        <div class="grid two">
+          <div class="card"><label>CO ZROBIŁEM DOBRZE?</label><textarea id="reviewGood" placeholder="Jedna konkretna rzecz..."></textarea></div>
+          <div class="card"><label>CO POPRAWIĘ JUTRO?</label><textarea id="reviewImprove" placeholder="Jedna konkretna poprawka..."></textarea></div>
+        </div>
+        <div class="card"><label>OCENA DNIA</label><div class="rating-row" id="ratingRow"></div></div>
+        <button class="primary large" id="closeDayBtn">Zamknij dzień i zapisz</button>
+      </section>
+
+      <section class="page" id="page-history">
+        <div class="page-head"><div><div class="eyebrow">HISTORIA</div><h1>Twoje wykonanie, nie teoria.</h1></div></div>
+        <div id="historyList" class="history-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="focusOverlay" class="focus-overlay hidden">
+    <div class="overlay-inner">
+      <div class="eyebrow">TRYB SKUPIENIA</div>
+      <div id="overlayTask" class="overlay-task">Skup się.</div>
+      <div id="overlayTimer" class="overlay-timer">25:00</div>
+      <button id="exitFocusBtn" class="ghost large">Wyjdź z pełnego ekranu</button>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

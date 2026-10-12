@@ -1,0 +1,23 @@
+{
+  "name": "focus-desktop",
+  "version": "1.0.0",
+  "description": "Minimalistyczna aplikacja Focus na Windows",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win portable"
+  },
+  "devDependencies": {
+    "electron": "^38.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "pl.trader.focusdesktop",
+    "productName": "Focus",
+    "files": ["main.js","preload.js","index.html","styles.css","app.js"],
+    "win": {
+      "target": ["portable"],
+      "artifactName": "Focus-${version}.exe"
+    }
+  }
+}
