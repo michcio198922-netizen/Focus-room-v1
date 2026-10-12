@@ -10,6 +10,7 @@ function createWindow() {
     backgroundColor: '#070A0F',
     title: 'Focus',
     autoHideMenuBar: true,
+    icon: path.join(__dirname, 'assets', 'icon.ico'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,

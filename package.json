@@ -1,6 +1,6 @@
 {
   "name": "focus-desktop",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Minimalistyczna aplikacja Focus na Windows",
   "main": "main.js",
   "scripts": {
@@ -14,10 +14,20 @@
   "build": {
     "appId": "pl.trader.focusdesktop",
     "productName": "Focus",
-    "files": ["main.js","preload.js","index.html","styles.css","app.js"],
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "styles.css",
+      "app.js",
+      "assets/**/*"
+    ],
     "win": {
-      "target": ["portable"],
-      "artifactName": "Focus-${version}.exe"
+      "target": [
+        "portable"
+      ],
+      "artifactName": "Focus-${version}.exe",
+      "icon": "assets/icon.ico"
     }
   }
 }
