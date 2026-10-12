@@ -1,0 +1,32 @@
+name: Build Focus Windows EXE
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Pobierz projekt
+        uses: actions/checkout@v4
+
+      - name: Ustaw Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Zainstaluj zależności
+        run: npm install
+
+      - name: Zbuduj EXE
+        run: npm run dist
+
+      - name: Udostępnij EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: Focus-Windows-EXE
+          path: dist/*.exe
+          if-no-files-found: error
