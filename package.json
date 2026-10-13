@@ -1,11 +1,11 @@
 {
   "name": "focus-desktop",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Minimalistyczna aplikacja Focus na Windows",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder --win portable"
+    "dist": "electron-builder --win nsis"
   },
   "devDependencies": {
     "electron": "^38.0.0",
@@ -24,10 +24,18 @@
     ],
     "win": {
       "target": [
-        "portable"
+        "nsis"
       ],
-      "artifactName": "Focus-${version}.exe",
+      "artifactName": "Focus-Setup-${version}.exe",
       "icon": "assets/icon.ico"
+    },
+    "asar": true,
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Focus"
     }
   }
 }
